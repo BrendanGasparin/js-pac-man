@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
 
     // Move Pac-Man
+    // TODO: Pac-Man should have a velocity, not a movement based on keyup
     function movePacman(e) {
         squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pac-man');
         if (e.key == 'ArrowLeft' || e.key == 'a')
