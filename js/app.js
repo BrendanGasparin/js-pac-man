@@ -54,9 +54,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 squares.push(square);
 
                 // Add layout to the board
-                if (layout[i][j] === 0) {
+                if (layout[i][j] === 0)
                     squares[count].classList.add('pellet');
-                }
+                if (layout[i][j] === 1)
+                    squares[count].classList.add('wall');
                 count++;
             }
     }

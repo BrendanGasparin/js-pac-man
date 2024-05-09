@@ -31,7 +31,16 @@ h1, h2 {
 }
 
 .pellet {
-    background-color: white;
-    border: 7px solid black;
-    box-sizing: border-box;
+  background-color: white;
+  border: 7px solid black;
+  box-sizing: border-box;
+}
+
+.wall {
+  background-color: blue;
+}
+
+.power-pellet {
+  background-color: white;
+  border-radius: 10px;
 }
