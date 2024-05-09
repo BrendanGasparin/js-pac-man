@@ -1,14 +1,15 @@
 // Wait for all DOM elements to load
 document.addEventListener('DOMContentLoaded', ()=> {
     const scoreDisplay = document.querySelector('#score');
-    const levelDisplay = document.querySelector('#level');
+    const livesDisplay = document.querySelector('#lives');
     const width = 28;
     let score = 0;
-    let level = 1
+    let level = 1;
+    let lives = 2;
     const grid = document.querySelector('.grid');
 
-    scoreDisplay.innerHTML = " " + score;
-    levelDisplay.innerHTML = " " + level;
+    scoreDisplay.innerHTML = ' ' + score;
+    livesDisplay.innerHTML = ' ' + lives;
 
     // DEFAULT LEVEL LAYOUT
     // 0 - dot
@@ -207,6 +208,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     }
 
     // TODO: check for game over
-    
+
     // TODO: check for level completion
 })
