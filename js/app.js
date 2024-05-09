@@ -78,20 +78,29 @@ document.addEventListener('DOMContentLoaded', ()=> {
     // TODO: Pac-Man should have a velocity, not a movement based on keyup
     function movePacman(e) {
         squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pac-man');
-        if ((e.key == 'ArrowLeft' || e.key == 'a') && (e.key != 'ArrowRight' && e.key != 'd') && (pacmanCurrentCol > 0) 
-             && squares[pacmanCurrentRow][pacmanCurrentCol - 1].classList.contains('wall')== false
-             && squares[pacmanCurrentRow][pacmanCurrentCol - 1].classList.contains('ghost-lair') == false)
-            pacmanCurrentCol--;
-        else if ((e.key == 'ArrowRight' || e.key == 'd') && (e.key != 'ArrowLeft' && e.key != 'a') && (pacmanCurrentCol < width) 
-                  && squares[pacmanCurrentRow][pacmanCurrentCol + 1].classList.contains('wall')== false
-                  && squares[pacmanCurrentRow][pacmanCurrentCol + 1].classList.contains('ghost-lair') == false)
-            pacmanCurrentCol++;
+        
+        if ((e.key === 'ArrowLeft' || e.key === 'a') && e.key !== 'ArrowRight' && e.key !== 'd') {
+            if (pacmanCurrentCol === 0 && pacmanCurrentRow === 13)
+                pacmanCurrentCol = width - 1;
+            else if (squares[pacmanCurrentRow][pacmanCurrentCol - 1].classList.contains('wall') == false
+                     && squares[pacmanCurrentRow][pacmanCurrentCol - 1].classList.contains('ghost-lair') == false
+                     && pacmanCurrentCol > 0)
+                pacmanCurrentCol--;
+        }
+        else if ((e.key === 'ArrowRight' || e.key === 'd') && e.key !== 'ArrowLeft' && e.key !== 'a') {
+            if (pacmanCurrentCol === width - 1 && pacmanCurrentRow === 13)
+                pacmanCurrentCol = 0;
+            else if (squares[pacmanCurrentRow][pacmanCurrentCol + 1].classList.contains('wall') == false
+                     && squares[pacmanCurrentRow][pacmanCurrentCol + 1].classList.contains('ghost-lair') == false
+                     && pacmanCurrentCol < width - 1)
+                pacmanCurrentCol++;
+        }
         else if ((e.key == 'ArrowUp' || e.key == 'w') && (e.key != 'ArrowDown' && e.key != 's') && (pacmanCurrentRow > 0)
                   && squares[pacmanCurrentRow - 1][pacmanCurrentCol].classList.contains('wall') == false
                   && squares[pacmanCurrentRow - 1][pacmanCurrentCol].classList.contains('ghost-lair') == false)
             pacmanCurrentRow--;
         else if ((e.key == 'ArrowDown' || e.key == 's') && (e.key != 'ArrowUp' && e.key != 'w') && (pacmanCurrentRow < width) 
-                  && squares[pacmanCurrentRow + 1][pacmanCurrentCol].classList.contains('wall')== false
+                  && squares[pacmanCurrentRow + 1][pacmanCurrentCol].classList.contains('wall') == false
                   && squares[pacmanCurrentRow + 1][pacmanCurrentCol].classList.contains('ghost-lair')== false)
             pacmanCurrentRow++;
 
