@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 grid.appendChild(square);
                 squares[i].push(square);
 
-                // Add layout to the board
+                // Add layout classes to the board
                 if (layout[i][j] === 0)
                     squares[i][j].classList.add('pellet');
                 if (layout[i][j] === 1)
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     createLevel();
 
+    // Place Pac-Man in the level
     let pacmanCurrentRow = 20;
     let pacmanCurrentCol = 14;
     squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
