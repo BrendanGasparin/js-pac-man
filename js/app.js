@@ -111,10 +111,11 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
         squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
         eatPellet();
+        eatPowerPellet();
     }
     document.addEventListener('keyup', movePacman);
 
-    // TODO: detect eating pellets
+    // detect eating pellets
     function eatPellet() {
         if (squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('pellet')) {
             score += 10;
@@ -123,7 +124,18 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
     }
 
-    // TODO: detect eating power pellets
+    // detect eating power pellets
+    function eatPowerPellet() {
+        if (squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('power-pellet')) {
+            score += 100;
+            scoreDisplay.innerHTML = " " + score;
+
+            // TODO: change ghosts to be scared
+
+            squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('power-pellet');
+        }
+    }
+
     // TODO: check for game over
     // TODO: check for level completion
 })

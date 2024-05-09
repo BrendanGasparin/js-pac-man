@@ -9,11 +9,11 @@ h1 {
 }
 
 h1, h2, .center-text {
-    text-align: center;
+  text-align: center;
 }
 
 p.center-text, h2 {
-    margin: 30px 0;
+  margin: 30px 0;
 }
 
 a, a:hover, a:visited {
