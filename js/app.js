@@ -73,4 +73,20 @@ document.addEventListener('DOMContentLoaded', ()=> {
     let pacmanCurrentRow = 20;
     let pacmanCurrentCol = 14;
     squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
+
+    // Move Pac-Man
+    function movePacman(e) {
+        squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pac-man');
+        if (e.key == 'ArrowLeft' || e.key == 'a')
+            pacmanCurrentCol--;
+        else if (e.key == 'ArrowRight' || e.key == 'd')
+            pacmanCurrentCol++;
+        else if (e.key == 'ArrowUp' || e.key == 'w')
+            pacmanCurrentRow--;
+        else if (e.key == 'ArrowDown' || e.key == 's')
+            pacmanCurrentRow++;
+
+        squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
+    }
+    document.addEventListener('keyup', movePacman);
 })
