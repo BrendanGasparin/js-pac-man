@@ -166,9 +166,43 @@ document.addEventListener('DOMContentLoaded', ()=> {
     })
 
     // Move ghosts randomly
-    /* ghosts.forEach(ghost => moveGhost(ghost));
+    ghosts.forEach(ghost => moveGhost(ghost));
     function moveGhost(ghost) {
-    } */
+        let direction = Math.floor(Math.random() * 4);
+
+        ghost.timerId = setInterval(function() {
+            // TODO: Stop a ghost from losing its styling when another ghost leaves its square
+            squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className);
+            let other_ghosts = false;
+            ghosts.forEach(other_ghost => {
+                if (squares[ghost.currentRow][ghost.currentCol].classList.contains(other_ghost.className) && other_ghost.className !== ghost.className)
+                    other_ghosts = true;
+            });
+            if(other_ghosts == false)
+                squares[ghost.currentRow][ghost.currentCol].classList.remove('ghost');
+
+            // squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className);
+
+            if (direction === 0 && squares[ghost.currentRow - 1][ghost.currentCol].classList.contains('wall') == false)
+                ghost.currentRow--;
+            else if (direction === 0)
+                direction = Math.floor(Math.random() * 4);
+            if (direction === 1 && squares[ghost.currentRow][ghost.currentCol + 1].classList.contains('wall') == false)
+                ghost.currentCol++;
+            else if (direction === 1)
+                direction = Math.floor(Math.random() * 4);
+            if (direction === 2 && squares[ghost.currentRow + 1][ghost.currentCol].classList.contains('wall') == false)
+                ghost.currentRow++;
+            else if (direction === 2)
+                direction = Math.floor(Math.random() * 4);
+            if (direction === 3 && squares[ghost.currentRow][ghost.currentCol - 1].classList.contains('wall') == false)
+                ghost.currentCol--;
+            else if (direction === 3)
+                direction = Math.floor(Math.random() * 4);
+
+            squares[ghost.currentRow][ghost.currentCol].classList.add(ghost.className, 'ghost');
+        }, ghost.speed);
+    }
 
     // TODO: check for game over
     // TODO: check for level completion
