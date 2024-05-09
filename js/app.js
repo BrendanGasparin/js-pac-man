@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     // detect eating power pellets
     function eatPowerPellet() {
         if (squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('power-pellet')) {
-            score += 100;
+            score += 50;
             scoreDisplay.innerHTML = " " + score;
 
             // TODO: change ghosts to be scared
