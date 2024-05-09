@@ -1,9 +1,14 @@
 // Wait for all DOM elements to load
 document.addEventListener('DOMContentLoaded', ()=> {
     const scoreDisplay = document.querySelector('#score');
+    const levelDisplay = document.querySelector('#level');
     const width = 28;
     let score = 0;
+    let level = 1
     const grid = document.querySelector('.grid');
+
+    scoreDisplay.innerHTML = " " + score;
+    levelDisplay.innerHTML = " " + level;
 
     // DEFAULT LEVEL LAYOUT
     // 0 - dot
@@ -105,6 +110,20 @@ document.addEventListener('DOMContentLoaded', ()=> {
             pacmanCurrentRow++;
 
         squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
+        eatPellet();
     }
     document.addEventListener('keyup', movePacman);
+
+    // TODO: detect eating pellets
+    function eatPellet() {
+        if (squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('pellet')) {
+            score += 10;
+            scoreDisplay.innerHTML = " " + score;
+            squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pellet');
+        }
+    }
+
+    // TODO: detect eating power pellets
+    // TODO: check for game over
+    // TODO: check for level completion
 })
