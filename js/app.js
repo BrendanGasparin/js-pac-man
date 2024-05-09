@@ -67,4 +67,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
     }
 
     createLevel();
+
+    let pacmanCurrentIndex = 490;
+    squares[pacmanCurrentIndex].classList.add('pac-man');
 })

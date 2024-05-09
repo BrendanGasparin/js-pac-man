@@ -64,7 +64,9 @@ h1, h2 {
 }
 
 .pac-man {
-  background-color: yellow;
+  background-color: rgb(255, 255, 0);
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .scared-ghost {
