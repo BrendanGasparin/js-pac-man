@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
 
+    // A 2d array to store the current game level state
     const squares = [];
 
     // Create level
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
                 grid.appendChild(square);
                 squares[i].push(square);
 
-                // Add layout classes to the board
+                // Add layout classes to the level
                 if (layout[i][j] === 0)
                     squares[i][j].classList.add('pellet');
                 if (layout[i][j] === 1)
