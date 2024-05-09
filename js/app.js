@@ -46,11 +46,18 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     // Create level
     function createLevel() {
+        let count = 0;
         for (let i = 0; i < width; i++)
             for (let j = 0; j < width; j++) {
                 const square = document.createElement('div');
                 grid.appendChild(square);
                 squares.push(square);
+
+                // Add layout to the board
+                if (layout[i][j] === 0) {
+                    squares[count].classList.add('pellet');
+                }
+                count++;
             }
     }
 
