@@ -46,28 +46,29 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
     // Create level
     function createLevel() {
-        let count = 0;
-        for (let i = 0; i < width; i++)
+        for (let i = 0; i < width; i++) {
+            squares[i] = [];
             for (let j = 0; j < width; j++) {
                 const square = document.createElement('div');
                 grid.appendChild(square);
-                squares.push(square);
+                squares[i].push(square);
 
                 // Add layout to the board
                 if (layout[i][j] === 0)
-                    squares[count].classList.add('pellet');
+                    squares[i][j].classList.add('pellet');
                 if (layout[i][j] === 1)
-                    squares[count].classList.add('wall');
+                    squares[i][j].classList.add('wall');
                 if (layout[i][j] === 2)
-                    squares[count].classList.add('ghost-lair');
+                    squares[i][j].classList.add('ghost-lair');
                 if (layout[i][j] === 3)
-                    squares[count].classList.add('power-pellet');
-                count++;
+                    squares[i][j].classList.add('power-pellet');
             }
+        }
     }
 
     createLevel();
 
-    let pacmanCurrentIndex = 574;
-    squares[pacmanCurrentIndex].classList.add('pac-man');
+    let pacmanCurrentRow = 20;
+    let pacmanCurrentCol = 14;
+    squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
 })
