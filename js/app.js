@@ -1,5 +1,5 @@
 // Wait for all DOM elements to load
-document.addEventListener('DomContentLoaded', ()=> {
+document.addEventListener('DOMContentLoaded', ()=> {
     const scoreDisplay = document.querySelector('#score');
     const width = 28;
     let score = 0;
@@ -25,7 +25,7 @@ document.addEventListener('DomContentLoaded', ()=> {
         [1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1],
         [1,1,1,1,1,1,0,1,1,0,1,1,1,2,2,1,1,1,0,1,1,0,1,1,1,1,1,1],
         [1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1],
-        [0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1],
+        [0,0,0,0,0,0,0,0,0,0,1,2,2,2,2,2,2,1,0,0,0,0,0,0,0,0,0,0],
         [1,1,1,1,1,1,0,1,1,0,1,2,2,2,2,2,2,1,0,1,1,0,1,1,1,1,1,1],
         [1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1],
         [1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1],
@@ -41,4 +41,18 @@ document.addEventListener('DomContentLoaded', ()=> {
         [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
         [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
     ];
+
+    const squares = [];
+
+    // Create level
+    function createLevel() {
+        for (let i = 0; i < width; i++)
+            for (let j = 0; j < width; j++) {
+                const square = document.createElement('div');
+                grid.appendChild(square);
+                squares.push(square);
+            }
+    }
+
+    createLevel();
 })
