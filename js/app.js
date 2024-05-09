@@ -136,6 +136,40 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
     }
 
+    // GHOSTS
+    // CONSTRUCTOR
+    class Ghost {
+        constructor(className, startRow, startCol, speed) {
+            this.className = className;
+            this.startRow = startRow;
+            this.currentRow = startRow;
+            this.startCol = startCol;
+            this.currentCol = startCol;
+            this.speed = speed;
+            this.isScared = false;
+            this.timerId = NaN;
+        }
+    }
+
+    // Array of ghosts
+    ghosts = [
+        new Ghost ('blinky', 10, 13, 250),
+        new Ghost ('pinky', 12, 14, 400),
+        new Ghost ('inky', 12, 15, 300),
+        new Ghost ('clyde', 12, 13, 500)
+    ]
+
+    // Render ghosts to the grid
+    ghosts.forEach(ghost => {
+        squares[ghost.currentRow][ghost.currentCol].classList.add(ghost.className);
+        squares[ghost.currentRow][ghost.currentCol].classList.add('ghost');
+    })
+
+    // Move ghosts randomly
+    /* ghosts.forEach(ghost => moveGhost(ghost));
+    function moveGhost(ghost) {
+    } */
+
     // TODO: check for game over
     // TODO: check for level completion
 })
