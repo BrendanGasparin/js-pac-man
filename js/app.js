@@ -166,13 +166,16 @@ document.addEventListener('DOMContentLoaded', ()=> {
     })
 
     // Move ghosts randomly
+    // TODO: Handle ghosts in the warp tunnel
     ghosts.forEach(ghost => moveGhost(ghost));
     function moveGhost(ghost) {
-        let direction = Math.floor(Math.random() * 4);
+        let direction = Math.floor(Math.random() * 4);  // Random direction: 0 is up, 1 is right, 2 is down, 3 is left
 
+        // Move the ghost at intervals according to ghost.speed
         ghost.timerId = setInterval(function() {
-            // TODO: Stop a ghost from losing its styling when another ghost leaves its square
+            // Stop a ghost from losing its styling when another ghost leaves its square
             squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className);
+            // Only remove the ghost class from the square if there are no other ghosts there
             let other_ghosts = false;
             ghosts.forEach(other_ghost => {
                 if (squares[ghost.currentRow][ghost.currentCol].classList.contains(other_ghost.className) && other_ghost.className !== ghost.className)
@@ -181,8 +184,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
             if(other_ghosts == false)
                 squares[ghost.currentRow][ghost.currentCol].classList.remove('ghost');
 
-            // squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className);
-
+            // Move the ghost in the given direction, or choose a new direction if there is a wall there
             if (direction === 0 && squares[ghost.currentRow - 1][ghost.currentCol].classList.contains('wall') == false)
                 ghost.currentRow--;
             else if (direction === 0)
@@ -205,5 +207,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     }
 
     // TODO: check for game over
+    
     // TODO: check for level completion
 })
