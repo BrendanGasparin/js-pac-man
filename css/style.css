@@ -42,6 +42,8 @@ h1, h2 {
 
 .power-pellet {
   background-color: white;
+  border: 3px solid black;
+  box-sizing: border-box;
   border-radius: 10px;
 }
 
