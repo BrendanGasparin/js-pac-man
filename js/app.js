@@ -58,6 +58,12 @@ document.addEventListener('DOMContentLoaded', ()=> {
                     squares[count].classList.add('pellet');
                 if (layout[i][j] === 1)
                     squares[count].classList.add('wall');
+                if (layout[i][j] === 2)
+                    squares[count].classList.add('ghost-lair');
+                if (layout[i][j] === 3)
+                    squares[count].classList.add('power-pellet');
+                if (layout[i][j] === 4)
+                    squares[count].classList.add('empty-space');
                 count++;
             }
     }
