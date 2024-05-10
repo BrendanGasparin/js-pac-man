@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
     let level = 1;
     let lives = 2;
     const grid = document.querySelector('.grid');
+    let scaredTime = 10000;
+    let pellets = 236;
 
     scoreDisplay.innerHTML = ' ' + score;
     livesDisplay.innerHTML = ' ' + lives;
@@ -122,6 +124,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
             score += 10;
             scoreDisplay.innerHTML = " " + score;
             squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pellet');
+            pellets--;
         }
     }
 
@@ -131,10 +134,17 @@ document.addEventListener('DOMContentLoaded', ()=> {
             score += 50;
             scoreDisplay.innerHTML = " " + score;
 
-            // TODO: change ghosts to be scared
+            // change ghosts to be scared
+            ghosts.forEach(ghost => ghost.isScared = true);
+            setTimeout(unscareGhosts, scaredTime);
 
             squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('power-pellet');
         }
+    }
+
+    // Unscare the ghosts
+    function unscareGhosts() {
+        ghosts.forEach(ghost => ghost.isScared = false);
     }
 
     // GHOSTS
@@ -176,14 +186,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
         ghost.timerId = setInterval(function() {
             // Stop a ghost from losing its styling when another ghost leaves its square
             squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className);
-            // Only remove the ghost class from the square if there are no other ghosts there
+            // Only remove the actual ghost class from the square if there are no other ghosts there
             let other_ghosts = false;
             ghosts.forEach(other_ghost => {
                 if (squares[ghost.currentRow][ghost.currentCol].classList.contains(other_ghost.className) && other_ghost.className !== ghost.className)
                     other_ghosts = true;
             });
-            if(other_ghosts == false)
-                squares[ghost.currentRow][ghost.currentCol].classList.remove('ghost');
+            if(other_ghosts === false)
+                squares[ghost.currentRow][ghost.currentCol].classList.remove('ghost', 'scared-ghost');
 
             // Move the ghost in the given direction, or choose a new direction if there is a wall there
             if (direction === 0 && squares[ghost.currentRow - 1][ghost.currentCol].classList.contains('wall') == false)
@@ -203,11 +213,62 @@ document.addEventListener('DOMContentLoaded', ()=> {
             else if (direction === 3)
                 direction = Math.floor(Math.random() * 4);
 
+            if (ghost.isScared) {
+                squares[ghost.currentRow][ghost.currentCol].classList.add('scared-ghost');
+            }
+
             squares[ghost.currentRow][ghost.currentCol].classList.add(ghost.className, 'ghost');
+
+            // Pac-Man eats a scared ghost
+            if (ghost.isScared && squares[ghost.currentRow][ghost.currentCol].classList.contains('pac-man')) {
+                squares[ghost.currentRow][ghost.currentCol].classList.remove(ghost.className, 'ghost', 'scared-ghost');
+                ghost.currentRow = ghost.startRow;
+                ghost.currentCol = ghost.startCol;
+                score += 100;
+                scoreDisplay.innerHTML = " " + score;
+                ghost.isScared = false;
+                squares[ghost.currentRow][ghost.currentCol].classList.add(ghost.className, 'ghost');
+            }
+            // Check if Pac-Man has been eaten
+            checkPacmanEaten();
+            // Check if level is complete
+            checkLevelComplete();
         }, ghost.speed);
     }
 
-    // TODO: check for game over
+    // check for ghosts eating Pac-Man
+    function checkPacmanEaten() {
+        if (squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('ghost') &&
+            squares[pacmanCurrentRow][pacmanCurrentCol].classList.contains('scared-ghost') == false) {
+            squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pac-man');
+            lives--;
+            if (lives >= 0)
+                livesDisplay.innerHTML = ' ' + lives;
+            console.log('Pac-Man was eaten.')
 
-    // TODO: check for level completion
+            if (lives < 0) {
+                gameOver();
+            }
+            else {
+                pacmanCurrentRow = 20;
+                pacmanCurrentCol = 14;
+                squares[pacmanCurrentRow][pacmanCurrentCol].classList.add('pac-man');
+            }
+        }
+    }
+
+    // Check for level completion
+    function checkLevelComplete() {
+        if (pellets === 0) {
+            level++;
+        }
+    }
+
+    // Handle game over
+    function gameOver() {
+        ghosts.forEach(ghost => clearInterval(ghost.timerId));
+        document.removeEventListener('keyup', movePacman);
+        squares[pacmanCurrentRow][pacmanCurrentCol].classList.remove('pac-man');
+        setTimeout(function() { alert('Game over!'); }, 500);
+    }
 })
